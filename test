@@ -1,128 +1,17 @@
-Below is a concise, in-place solution to merge two sorted arrays using the three-pointer approach from the end, along with a JUnit 5 test class demonstrating parameterized testing.
 
-⸻
+Subject: Clarification on Performance Review and Hike Percentage
 
-Solution Class
+Hi [Manager 1] and [Manager 2],
 
-File: src/main/java/com/vishnu/problems/arrays/MergeSortedArray.java
+I hope you’re doing well.
 
-package com.vishnu.problems.arrays;
+I wanted to seek clarification regarding my appraisal this year. Based on my performance review discussion, I received 3 points in two categories and 2 points in one category. At no point during the conversation did I get the impression that my performance warranted a 0% hike.
 
-public class MergeSortedArray {
+However, after the recent meeting with [Senior Leader], I learned that [Percentage]% of employees were satisfied with their hikes and that the hike percentage was based on individual performance. This has left me quite confused, as I would like to understand where I fell short.
 
-    /**
-     * Merges array nums2 into nums1 as one sorted array in-place.
-     * 
-     * @param nums1 the first sorted array with enough space at the end to hold nums2
-     * @param m     the number of valid elements in nums1
-     * @param nums2 the second sorted array
-     * @param n     the number of elements in nums2
-     */
-    public void merge(int[] nums1, int m, int[] nums2, int n) {
-        int index1 = m - 1;          // pointer for nums1
-        int index2 = n - 1;          // pointer for nums2
-        int mergeIndex = m + n - 1;  // pointer for merged array (at the end of nums1)
+Was there any negative feedback from the team leads or managers that contributed to this decision? (During the meeting, [Senior Leader] mentioned that the hike was based on discussions among various people, so I wanted to check if there was any specific feedback that impacted my appraisal.) I would appreciate any insights on areas where I need to improve. I would also like to have an open conversation about this, as understanding the rationale behind this decision is important for me to grow and align better with expectations.
 
-        // Merge from the end
-        while (index1 >= 0 && index2 >= 0) {
-            if (nums1[index1] > nums2[index2]) {
-                nums1[mergeIndex] = nums1[index1];
-                index1--;
-            } else {
-                nums1[mergeIndex] = nums2[index2];
-                index2--;
-            }
-            mergeIndex--;
-        }
+Looking forward to your response.
 
-        // If there are remaining elements in nums2, copy them
-        while (index2 >= 0) {
-            nums1[mergeIndex] = nums2[index2];
-            index2--;
-            mergeIndex--;
-        }
-    }
-}
-
-Explanation:
-	1.	We maintain three pointers:
-	•	index1 tracks the end of the valid elements in nums1.
-	•	index2 tracks the end of nums2.
-	•	mergeIndex tracks the position where the merged element should go in nums1.
-	2.	Compare the elements at index1 and index2. Whichever is larger gets placed at mergeIndex, then decrement the corresponding pointer and mergeIndex.
-	3.	If any elements remain in nums2 (i.e., index2 is not exhausted), copy them into the front portion of nums1.
-
-Using pointers from the end avoids additional space usage.
-
-⸻
-
-Test Class
-
-File: src/test/java/com/vishnu/problems/arrays/MergeSortedArrayTest.java
-
-package com.vishnu.problems.arrays;
-
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-
-import java.util.stream.Stream;
-
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodSource;
-import org.junit.jupiter.api.TestFactory;
-import org.junit.jupiter.params.provider.Arguments;
-
-public class MergeSortedArrayTest {
-
-    private final MergeSortedArray solution = new MergeSortedArray();
-
-    @TestFactory
-    @DisplayName("MergeSortedArray Tests")
-    Stream<org.junit.jupiter.api.DynamicTest> mergeTests() {
-        return Stream.of(
-            Arguments.of(new int[]{1,2,3,0,0,0}, 3, new int[]{2,5,6}, 3, new int[]{1,2,2,3,5,6}),
-            Arguments.of(new int[]{1}, 1, new int[]{}, 0, new int[]{1}),
-            Arguments.of(new int[]{0}, 0, new int[]{1}, 1, new int[]{1}),
-            Arguments.of(new int[]{2,0}, 1, new int[]{1}, 1, new int[]{1,2}),
-            Arguments.of(new int[]{4,5,6,0,0,0}, 3, new int[]{1,2,3}, 3, new int[]{1,2,3,4,5,6})
-        ).map(args -> org.junit.jupiter.api.DynamicTest.dynamicTest(
-                "nums1: %s, nums2: %s".formatted(
-                        arrayToString((int[]) args.get()[0]),
-                        arrayToString((int[]) args.get()[2])
-                ), () -> {
-                    // Arrange
-                    int[] nums1 = (int[]) args.get()[0];
-                    int m = (int) args.get()[1];
-                    int[] nums2 = (int[]) args.get()[2];
-                    int n = (int) args.get()[3];
-                    int[] expected = (int[]) args.get()[4];
-
-                    // Act
-                    solution.merge(nums1, m, nums2, n);
-
-                    // Assert
-                    assertArrayEquals(expected, nums1);
-                }
-        ));
-    }
-
-    /**
-     * Utility method for converting arrays to a string.
-     */
-    private String arrayToString(int[] arr) {
-        return java.util.Arrays.toString(arr);
-    }
-}
-
-Notes:
-	1.	We use @TestFactory with dynamic tests so that each test case is generated and reported individually.
-	2.	assertArrayEquals ensures the final contents of nums1 match the expected merged array.
-	3.	We rely on Java’s enhanced switch or pattern matching capabilities as needed in other contexts, but for this merging logic, a simple while loop with pointers is both efficient and clear.
-
-⸻
-
-How to Run
-	1.	Ensure you are using Java 21 and JUnit 5 in your project setup.
-	2.	Place the files in the appropriate directories (package structure as shown above).
-	3.	Execute your tests via Maven, Gradle, or your IDE’s test runner.
-
-This completes a clean, efficient solution and test for merging two sorted arrays in-place without allocating extra space.
+Best regards,
+[Your Name]
